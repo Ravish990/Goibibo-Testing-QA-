@@ -7,61 +7,71 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 
 public class Project2 {
 
     @Test
-    public void test1() throws InterruptedException {
-        WebDriverManager.chromedriver().setup(); 
+    public void test1() {
+        WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.manage().window().maximize();
 
-        driver.get("https://www.goibibo.com/flights/");
-        Thread.sleep(1000);
+        try {
+            driver.get("https://www.goibibo.com/flights/");
 
-        WebElement element = driver.findElement(By.xpath("//span[@class=\"logSprite icClose\"]"));
-        element.click();
+            // Close popup
+            WebElement closePopup = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='logSprite icClose']")));
+            closePopup.click();
 
-        Thread.sleep(1000);
-        element = driver.findElement(By.xpath("(//div[@class=\"sc-12foipm-2 eTBlJr fswFld \"])[1]"));
-        element.click();
+            // Click on 'From' field
+            WebElement fromField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='sc-12foipm-2 eTBlJr fswFld '])[1]")));
+            fromField.click();
 
-        element = driver.findElement(By.xpath("(//div[@class=\"sc-12foipm-24 bDSkOK\"])/div/input"));
-        element.sendKeys("Bengaluru");
+            // Enter 'Bengaluru' in from city
+            WebElement fromInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='sc-12foipm-24 bDSkOK'])/div/input")));
+            fromInput.sendKeys("Bengaluru");
 
-        Thread.sleep(1000);
-        element = driver.findElement(By.xpath("(//div[@class=\"sc-12foipm-29 gEpyDY\"])[1]"));
-        element.click();
+            // Select the first suggestion
+            WebElement fromSuggestion = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//p[@class='sc-12foipm-33 kUcHKT'])[1]")));
+            fromSuggestion.click();
 
-        element = driver.findElement(By.xpath("//div[@class=\"sc-12foipm-25 fbAAhv\"]/input"));
-        element.sendKeys("Patna");
+            // Enter 'Patna' in to city
+            WebElement toInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='sc-12foipm-25 fbAAhv']/input")));
+            toInput.sendKeys("Patna");
 
-        Thread.sleep(1000);
-        element = driver.findElement(By.xpath("(//div[@class=\"sc-12foipm-29 gEpyDY\"])[1]"));
-        element.click();
+            // Select the first suggestion
+            WebElement toSuggestion = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='sc-12foipm-29 gEpyDY'])[1]")));
+            toSuggestion.click();
 
-        Thread.sleep(3000);
-        Actions action = new Actions(driver);
-        element = driver.findElement(By.xpath("//div[@class=\"sc-zdy0j7-4 dBaZvf\"]"));
-        action.moveToElement(element).perform();
+            // Hover over departure date
+            Actions action = new Actions(driver);
+            WebElement dateField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='sc-zdy0j7-4 dBaZvf']")));
+            action.moveToElement(dateField).perform();
 
-        Thread.sleep(3000);
-        element = driver.findElement(By.xpath("//span[@class=\"sc-12foipm-72 ezNmSh\"]"));
-        element.click();
+            // Select a date
+            WebElement dateSelect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='sc-12foipm-72 ezNmSh']")));
+            dateSelect.click();
 
-        Thread.sleep(15000);
-        element = driver.findElement(By.xpath("//span[@class=\"button buttonPrimary pushRight widthFitContent\"]"));
-        element.click();
+            // Click on search flights
+            WebElement searchFlights = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='button buttonPrimary pushRight widthFitContent']")));
+            searchFlights.click();
 
-        Thread.sleep(2000);
-        element = driver.findElement(By.xpath("(//span[text()=\"VIEW FARES\"])[1]"));
-        element.click();
+            // Wait for the results to load and click on 'View Fares'
+            WebElement viewFares = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[text()='VIEW FARES'])[1]")));
+            viewFares.click();
 
-        Thread.sleep(1000);
-        element = driver.findElement(By.xpath("//button[@class=\"lato-black button buttonPrimary buttonBig fontSize14\"][1]"));
-        element.click();
+            // Click on 'Book Now'
+            WebElement bookNow = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='lato-black button buttonPrimary buttonBig fontSize14'][1]")));
+            bookNow.click();
 
-        Thread.sleep(3000);
-        driver.quit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            driver.quit();
+        }
     }
 }
