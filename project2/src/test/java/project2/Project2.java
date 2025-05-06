@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
 import java.util.List;
-import java.util.Set;
 
 public class Project2 {
 
@@ -217,45 +216,4 @@ public class Project2 {
             driver.quit();
         }
     }
-
-    Thread.sleep(2000);
-
-	    driver.switchTo().defaultContent();
-	    
-	    
-
-	    element = driver.findElement(By.xpath("//a[@href='/coupon']"));
-	    element.click();
-
-	    
-	    Thread.sleep(2000);
-	    
-	    Set<String> windowHandles = driver.getWindowHandles();
-	    Iterator<String> iterator = windowHandles.iterator();
-
-	    String originalWindow1 = iterator.next(); 
-	    String newTab1 = null;
-	    
-	    
-	    Thread.sleep(2000);
-
-	    if (iterator.hasNext()) {
-	        newTab1 = iterator.next();
-	        driver.switchTo().window(newTab1);
-
-	        WebElement span = driver.findElement(By.xpath("//span"));
-	        String coupon = span.getText();
-
-	        driver.close();
-	        driver.switchTo().window(originalWindow1); 
-
-	        element = driver.findElement(By.xpath("//input[@placeholder='Enter special code']"));
-	        element.sendKeys(coupon);
-
-	        element = driver.findElement(By.xpath("//button[text()='Submit Code']"));
-	        element.click();
-	    } else {
-	        throw new RuntimeException("New tab not opened!");
-	    }
-	}
     }
