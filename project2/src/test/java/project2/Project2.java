@@ -28,6 +28,16 @@ public class Project2 {
             } catch (Exception e) {
                 System.out.println("Popup not found or already closed.");
             }
+            
+//            JavascriptExecutor js = (JavascriptExecutor)driver;
+//     
+//    		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,1000);
+//    		Thread.sleep(1000);
+//    		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,-500);
+//    		Thread.sleep(1000);
+//    		js.executeScript("window.scrollBy(0, document.body.scrollHeight)");
+    		
+
 
             WebElement fromField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='sc-12foipm-2 eTBlJr fswFld '])[1]")));
             fromField.click();
@@ -43,17 +53,67 @@ public class Project2 {
 
             WebElement toSuggestion = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='sc-12foipm-29 gEpyDY'])[1]")));
             toSuggestion.click();
+            
+            WebElement dateField = driver.findElement(By.xpath("(//p[@class=\"sc-12foipm-4 czGBLf fswWidgetTitle\"])[3]"));
 
+//             action 
+            
             Actions action = new Actions(driver);
-            WebElement dateField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='sc-zdy0j7-4 dBaZvf']")));
-            action.moveToElement(dateField).perform();
+            
+            action.moveToElement(dateField).click().perform();
+            
+            
 
-            WebElement dateSelect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='sc-12foipm-72 ezNmSh']")));
+            WebElement dateSelect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//p[@class=\"fsw__date\"])[30]")));
             dateSelect.click();
+            
+            
+            
+            WebElement userSelect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//p[@class=\"sc-12foipm-4 czGBLf fswWidgetTitle\"])[4]")));
+            userSelect.click();
+           
 
-            WebElement searchFlights = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='button buttonPrimary pushRight widthFitContent']")));
+    
+         WebElement addUser = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[@class='sc-12foipm-51 kZvHQU'])[2]")));
+         WebElement checkLimit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='sc-12foipm-52 jueHCN'])[1]")));
+
+         while (true) {
+             String beforeText = checkLimit.getText();
+             addUser.click();
+             checkLimit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='sc-12foipm-52 jueHCN'])[1]")));
+             String afterText = checkLimit.getText();
+
+             if (afterText.equals(beforeText)) {
+                 break;
+             }
+         }
+
+
+         WebElement deleteUser = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[@class='sc-12foipm-51 kZvHQU'])[1]")));
+
+      
+         while (true) {
+             String beforeText = checkLimit.getText();
+             deleteUser.click();
+             checkLimit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='sc-12foipm-52 jueHCN'])[1]")));
+             String afterText = checkLimit.getText();
+
+             if (afterText.equals(beforeText)) {
+                 break;
+             }
+         }
+
+        
+         WebElement done = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Done']")));
+         done.click();
+
+
+            WebElement searchFlights = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class=\"sc-12foipm-72 ezNmSh\"]")));
             searchFlights.click();
-
+            
+            WebElement gotIt = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text() = \"GOT IT\"]")));
+            
+            gotIt.click();
             WebElement viewFares = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[text()='VIEW FARES'])[1]")));
             viewFares.click();
 
@@ -79,21 +139,6 @@ public class Project2 {
     public void testMumbaiToDelhi() {
         bookFlight("Mumbai", "Delhi");
     }
-
-//    @Test(priority = 3)
-//    public void testHyderabadToKolkata() {
-//        bookFlight("Hyderabad", "Kolkata");
-//    }
-//
-//    @Test(priority = 4)
-//    public void testChennaiToJaipur() {
-//        bookFlight("Chennai", "Jaipur");
-//    }
-//
-//    @Test(priority = 5)
-//    public void testPuneToAhmedabad() {
-//        bookFlight("Pune", "Ahmedabad");
-//    }
 
     @Test(priority = 6)
     public void testHomePageElements() {
