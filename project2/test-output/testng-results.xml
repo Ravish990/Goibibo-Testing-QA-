@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="6" total="7" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="7" passed="7" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-07T06:04:50 IST" name="Default suite" finished-at="2025-05-07T06:04:53 IST" duration-ms="3417">
+  <suite started-at="2025-05-07T06:10:24 IST" name="Default suite" finished-at="2025-05-07T06:11:05 IST" duration-ms="41043">
     <groups>
     </groups>
-    <test started-at="2025-05-07T06:04:50 IST" name="Default test" finished-at="2025-05-07T06:04:53 IST" duration-ms="3417">
+    <test started-at="2025-05-07T06:10:24 IST" name="Default test" finished-at="2025-05-07T06:11:05 IST" duration-ms="41043">
       <class name="project2.Project2">
-        <test-method signature="jsExecutor()[pri:6, instance:project2.Project2@38425407]" started-at="2025-05-07T06:04:50 IST" name="jsExecutor" finished-at="2025-05-07T06:04:53 IST" duration-ms="3377" status="PASS">
+        <test-method signature="testBangaloreToPatna()[pri:1, instance:project2.Project2@45752059]" started-at="2025-05-07T06:10:24 IST" name="testBangaloreToPatna" finished-at="2025-05-07T06:10:35 IST" duration-ms="10917" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBangaloreToPatna -->
+        <test-method signature="testMumbaiToDelhi()[pri:2, instance:project2.Project2@45752059]" started-at="2025-05-07T06:10:35 IST" name="testMumbaiToDelhi" finished-at="2025-05-07T06:10:46 IST" duration-ms="10749" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMumbaiToDelhi -->
+        <test-method signature="hoverTest()[pri:4, instance:project2.Project2@45752059]" started-at="2025-05-07T06:10:46 IST" name="hoverTest" finished-at="2025-05-07T06:10:48 IST" duration-ms="2447" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- hoverTest -->
+        <test-method signature="login()[pri:5, instance:project2.Project2@45752059]" started-at="2025-05-07T06:10:48 IST" name="login" finished-at="2025-05-07T06:10:51 IST" duration-ms="2991" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method signature="jsExecutor()[pri:6, instance:project2.Project2@45752059]" started-at="2025-05-07T06:10:51 IST" name="jsExecutor" finished-at="2025-05-07T06:10:54 IST" duration-ms="2876" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jsExecutor -->
+        <test-method signature="testHomePageElements()[pri:6, instance:project2.Project2@45752059]" started-at="2025-05-07T06:10:54 IST" name="testHomePageElements" finished-at="2025-05-07T06:10:59 IST" duration-ms="4411" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHomePageElements -->
+        <test-method signature="windowHandle()[pri:7, instance:project2.Project2@45752059]" started-at="2025-05-07T06:10:59 IST" name="windowHandle" finished-at="2025-05-07T06:11:05 IST" duration-ms="6599" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- windowHandle -->
       </class> <!-- project2.Project2 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
