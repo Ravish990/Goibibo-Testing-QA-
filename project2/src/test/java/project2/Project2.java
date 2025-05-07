@@ -1,5 +1,6 @@
 package project2;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,7 +9,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class Project2 {
 
@@ -28,16 +31,6 @@ public class Project2 {
             } catch (Exception e) {
                 System.out.println("Popup not found or already closed.");
             }
-            
-//            JavascriptExecutor js = (JavascriptExecutor)driver;
-//     
-//    		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,1000);
-//    		Thread.sleep(1000);
-//    		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,-500);
-//    		Thread.sleep(1000);
-//    		js.executeScript("window.scrollBy(0, document.body.scrollHeight)");
-    		
-
 
             WebElement fromField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='sc-12foipm-2 eTBlJr fswFld '])[1]")));
             fromField.click();
@@ -95,6 +88,7 @@ public class Project2 {
          while (true) {
              String beforeText = checkLimit.getText();
              deleteUser.click();
+             
              checkLimit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='sc-12foipm-52 jueHCN'])[1]")));
              String afterText = checkLimit.getText();
 
@@ -102,13 +96,40 @@ public class Project2 {
                  break;
              }
          }
-
+  WebElement iframe = driver.findElement(By.id("webpush-onsite"));
+         
+         driver.switchTo().frame(iframe);
+         
+          WebElement deny = driver.findElement(By.id("deny"));
+         
+         deny.click();
+         
+         driver.switchTo().defaultContent();
+         
         
          WebElement done = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Done']")));
          done.click();
-
-
-            WebElement searchFlights = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class=\"sc-12foipm-72 ezNmSh\"]")));
+         
+         
+         
+         WebElement radio = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class=\"sc-12foipm-91 biWUTl\"])[1]")));
+         
+         radio.click();
+        
+         
+         WebElement radio1 = driver.findElement(By.xpath("(//div[@class=\"sc-12foipm-91 biWUTl\"])[2]"));
+         radio1.click();
+         
+         WebElement radio2 = driver.findElement(By.xpath("(//div[@class=\"sc-12foipm-91 biWUTl\"])[3]"));
+         radio2.click();
+         
+         WebElement radio3 = driver.findElement(By.xpath("(//div[@class=\"sc-12foipm-91 biWUTl\"])[4]"));
+         radio3.click();
+         
+         
+         radio3.click();
+         
+            WebElement searchFlights = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text() = \"SEARCH FLIGHTS\"]")));
             searchFlights.click();
             
             WebElement gotIt = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text() = \"GOT IT\"]")));
@@ -215,5 +236,147 @@ public class Project2 {
         } finally {
             driver.quit();
         }
+    }
+    @Test(priority = 4)
+    public void hoverTest() {
+    	 WebDriverManager.chromedriver().setup();
+         WebDriver driver = new ChromeDriver();
+         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+         driver.manage().window().maximize();
+         driver.get("https://www.goibibo.com/flights/");
+      // Wait for the page to load and close any popups if present
+         try {
+             WebElement closePopup = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='logSprite icClose']")));
+             closePopup.click();
+         } catch (Exception e) {
+             System.out.println("Popup not found or already closed.");
+         }
+         WebElement hover = driver.findElement(By.xpath("//a[@href=\"/travelhistory\"]"));
+         
+         Actions action = new Actions(driver);
+         
+         action.moveToElement(hover).perform();
+         
+         WebElement onHover = driver.findElement(By.xpath("(//p[@class=\"sc-imWYAI pQYto\"])[1]"));
+         
+         Assert.assertEquals(true, onHover.isDisplayed());
+         
+         driver.quit();
+    	
+    }
+    
+    @Test(priority = 5)
+    public void login() {
+    	
+    	 WebDriverManager.chromedriver().setup();
+         WebDriver driver = new ChromeDriver();
+         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+         driver.manage().window().maximize();
+         driver.get("https://www.goibibo.com/flights/");
+      // Wait for the page to load and close any popups if present
+         try {
+             WebElement closePopup = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='logSprite icClose']")));
+             closePopup.click();
+         } catch (Exception e) {
+             System.out.println("Popup not found or already closed.");
+         }
+    	
+    	WebElement login = driver.findElement(By.xpath("//div[@data-id=\"user-info-tab\"]"));
+    	
+    	Actions action = new Actions(driver);
+    	action.moveToElement(login).click().perform();
+
+    	
+    	WebElement loginAccount = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class=\"loginCont__input\"]")));
+    	loginAccount.click();
+    	
+    	
+    	
+    	loginAccount.sendKeys("9905534207");
+    	
+    	WebElement button = driver.findElement(By.xpath("//button[text() = \"Continue\"]"));
+    	
+    	button.click();
+    	
+    	driver.quit();
+    }
+    
+    @Test (priority = 6)
+    public void jsExecutor() {
+    	WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().window().maximize();
+        driver.get("https://www.goibibo.com/flights/");
+     // Wait for the page to load and close any popups if present
+        try {
+            WebElement closePopup = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='logSprite icClose']")));
+            closePopup.click();
+        } catch (Exception e) {
+            System.out.println("Popup not found or already closed.");
+        }
+        JavascriptExecutor js;
+        js = (JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,1000);
+	
+		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,-500);
+		
+		js.executeScript("document.body.style.zoom='170%';");
+		
+		js.executeScript("document.body.style.zoom='40%';");
+		
+		js.executeScript("window.scrollBy(0, document.body.scrollHeight)");
+		
+		driver.quit();
+		   
+    }
+    
+    @Test (priority = 7)
+    public void windowHandle() throws InterruptedException {
+    	WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().window().maximize();
+        driver.get("https://www.goibibo.com/flights/");
+     // Wait for the page to load and close any popups if present
+        try {
+            WebElement closePopup = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='logSprite icClose']")));
+            closePopup.click();
+        } catch (Exception e) {
+            System.out.println("Popup not found or already closed.");
+        }
+        
+        WebElement window2 = driver.findElement(By.xpath("//a[@href=\"/giholidays/\"]"));
+       window2.click();
+      
+       Thread.sleep(3000);
+       
+       Set<String> tabs = driver.getWindowHandles();
+       
+       Iterator<String> itr = tabs.iterator();
+       
+       String tab1 = itr.next();
+       
+       String tab2 = null;
+       
+       if (itr.hasNext()) {
+    	   tab2 = itr.next();
+    	   
+    	   driver.switchTo().window(tab2);
+    	   
+    	   WebElement search = driver.findElement(By.id("search_button"));
+    	   
+    	   search.click();
+    	   
+    	   driver.switchTo().window(tab1);
+    	   
+    	   driver.close();
+    	   
+    	   
+       }
+       
+       driver.quit();
+       
+       
     }
     }

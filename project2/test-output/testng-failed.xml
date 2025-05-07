@@ -5,9 +5,7 @@
     <classes>
       <class name="project2.Project2">
         <methods>
-          <include name="tearDown"/>
-          <include name="bookFlightTest"/>
-          <include name="setUp"/>
+          <include name="login"/>
         </methods>
       </class> <!-- project2.Project2 -->
     </classes>
