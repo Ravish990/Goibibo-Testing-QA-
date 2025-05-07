@@ -317,17 +317,17 @@ public class Project2 {
         }
         JavascriptExecutor js;
         js = (JavascriptExecutor)driver;
-		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,1000);
+		js.executeScript("window.scrollBy(arguments[0], arguments[1]); console.log('scroll down');", 0,1000);
 	
-		js.executeScript("window.scrollBy(arguments[0], arguments[1])", 0,-500);
+		js.executeScript("window.scrollBy(arguments[0], arguments[1]); console.log('scroll up')", 0,-500);
 		
-		js.executeScript("document.body.style.zoom='170%';");
+		js.executeScript("document.body.style.zoom='170%'; console.log('zoomed in')");
 		
-		js.executeScript("document.body.style.zoom='40%';");
+		js.executeScript("document.body.style.zoom='40%';console.log('zoomed up')");
 		
-		js.executeScript("window.scrollBy(0, document.body.scrollHeight)");
+		js.executeScript("window.scrollBy(0, document.body.scrollHeight); console.log('scrolled down')");
 		
-		driver.quit();
+//		driver.quit();
 		   
     }
     
