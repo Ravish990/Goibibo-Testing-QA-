@@ -22,10 +22,6 @@ goibibo-qa/
 ├── pom.xml # Maven Configuration
 └── README.md
 
-markdown
-Copy
-Edit
-
 ## ✅ Features Covered
 
 - **Home Page Login**
@@ -54,10 +50,6 @@ Update WebDriver Path (if needed)
 Make sure the path to chromedriver is correctly set in your test base or system properties.
 
 Run Tests via Maven
-
-bash
-Copy
-Edit
 mvn clean test
 Run Specific Suite via TestNG
 
