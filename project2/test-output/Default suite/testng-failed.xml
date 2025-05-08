@@ -5,6 +5,7 @@
     <classes>
       <class name="project2.Project2">
         <methods>
+          <include name="windowHandle"/>
           <include name="jsExecutor"/>
         </methods>
       </class> <!-- project2.Project2 -->
